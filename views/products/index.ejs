@@ -1,0 +1,38 @@
+<%- include("../partials/header") %> <%- include("../partials/navbar")%>
+
+<main class="container">
+  <section>
+    <h4 class="display-4">Our Products</h4>
+  </section>
+
+  <%- include("../partials/flash")%>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <%for(let product of products){%>
+    <div class="col">
+      <div class="card">
+        <img
+          src="<%= product.img %>"
+          class="card-img-top"
+          alt="<%= product.name %>"
+        />
+        <div class="card-body">
+          <h5 class="card-title"><%= product.name %></h5>
+          <p class="card-text"><%= product.subheading %></p>
+          <p class="card-text"><strong>$ <%= product.price %></strong></p>
+          <div class="d-grid gap-2">
+            <a
+              href="/products/<%= product._id %>"
+              class="btn btn-outline-primary"
+              type="button"
+              >More Info</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <% }%>
+  </div>
+</main>
+
+<%-include("../partials/footer")%>

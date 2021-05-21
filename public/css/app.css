@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Orelega+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=PT+Serif&display=swap");
+
+body {
+  background-color: #ececec;
+}
+.navbar {
+  background-color: #aaa69d;
+}
+.navbar-brand {
+  font-size: 1.7rem;
+  font-family: "Orelega One", cursive;
+}
+.nav-item .nav-link,
+.shopping {
+  font-size: 1.2rem;
+  font-family: "PT Serif", serif;
+  font-weight: 600;
+}
+
+.row-cols-1 .card:hover {
+  transform: scale(1.01);
+  box-shadow: 5px 2px 20px 5px rgb(204, 203, 203);
+}
+
+.show .row .col-md-6 img {
+  width: 400px;
+  height: auto;
+}
+
+#ex4 .p1[data-count]:after {
+  position: absolute;
+  right: 10%;
+  top: 8%;
+  content: attr(data-count);
+  font-size: 40%;
+  padding: 0.2em;
+  border-radius: 50%;
+  line-height: 1em;
+  color: white;
+  background: rgba(255, 0, 0, 0.85);
+  text-align: center;
+  min-width: 1em;
+}
+.product_name {
+  font-size: 1.4rem;
+}
+.product_img img {
+  min-height: 200px;
+  max-height: 200px;
+}
+.card-title p {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.remove_wish button {
+  font-size: 0.6rem;
+}
+.price_money h3 {
+  font-size: 1rem;
+}
+
+.page-link {
+  line-height: 16px;
+  width: 40px;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.page-link:focus {
+  box-shadow: none !important;
+}
+
+.page-item input {
+  line-height: 22px;
+  padding: 3px;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.price_indiv {
+  font-size: 1.1rem;
+}

@@ -1,0 +1,176 @@
+<%- include("../partials/header") %> <%- include("../partials/navbar")%>
+
+<div class="container-fluid my-5">
+  <div class="row">
+    <div class="col-md-10 col-11 mx-auto">
+      <div class="row gx-3">
+        <!-- left side div -->
+        <%- include("../partials/flash")%>
+        <div
+          class="
+            col-md-12 col-lg-8 col-11
+            mx-auto
+            main_cart
+            mb-lg-0 mb-5
+            shadow
+          "
+        >
+          <h2 class="p-4 fw-bold">My Cart(<%=cart.length%>)</h2>
+          <hr />
+          <% total = 0 %> <%for(let cartDetails of cart){%>
+          <div class="card my-2 p-4 border-0">
+            <div class="row">
+              <!-- cart images div -->
+              <div
+                class="
+                  col-md-5 col-11
+                  mx-auto
+                  bg-light
+                  d-flex
+                  justify-content-center
+                  align-items-center
+                  shadow
+                  product_img
+                "
+              >
+                <img
+                  src="<%=cartDetails.details.img%>"
+                  class="img-fluid"
+                  alt="<%=cartDetails.details.name%>"
+                />
+              </div>
+              <!-- cart product details -->
+              <div class="col-md-7 col-12 my-2">
+                <div class="row">
+                  <!-- product name -->
+                  <div class="col-8 card-title">
+                    <h1 class="mb-4 product_name text-capitalize fw-bold">
+                      <%=cartDetails.details.name%>
+                    </h1>
+                    <p class="mb-2">Shirt: Blue</p>
+                    <p class="mb-2">Color: Blue</p>
+                    <p class="mb-2">Size: M</p>
+                  </div>
+
+                  <!-- quantity increment     -->
+                  <div class="col-4 d-flex justify-content-end">
+                    <ul class="pagination set_quantity">
+                      <li class="page-item">
+                        <form
+                          action="/cart/update/<%=cartDetails._id%>?_method=PATCH&action=DEC"
+                          method="POST"
+                        >
+                          <button class="page-link text-dark">
+                            <i class="fas fa-minus"></i>
+                          </button>
+                        </form>
+                      </li>
+                      <li class="page-item">
+                        <input
+                          class="page-link text-dark text-center textbox"
+                          type="text"
+                          name="count"
+                          value="<%=cartDetails.qty%>"
+                          id="textbox"
+                          disabled
+                        />
+                      </li>
+
+                      <li class="page-item">
+                        <form
+                          action="/cart/update/<%=cartDetails._id%>?_method=PATCH&action=INC"
+                          method="POST"
+                        >
+                          <button class="page-link text-dark">
+                            <i class="fas fa-plus"></i>
+                          </button>
+                        </form>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <!-- remove wishlist & price -->
+                <div class="row">
+                  <div class="col-5 remove_wish">
+                    <form
+                      action="/user/cart/<%=cartDetails._id%>/<%=User._id%>?_method=DELETE"
+                      method="POST"
+                    >
+                      <button class="btn btn-sm btn-outline-danger">
+                        <i class="fas fa-trash-alt"></i> Remove Item
+                      </button>
+                    </form>
+                  </div>
+                  <div
+                    class="col-4 remove_wish d-flex justify-content-start p-0"
+                  >
+                    <button class="btn btn-sm btn-outline-warning">
+                      <i class="fas fa-heart"></i> Move to Wishlist
+                    </button>
+                  </div>
+                  <div class="col-3 d-flex justify-content-end price_money">
+                    <h3>
+                      $<span id="itemVal"><%=cartDetails.details.price%></span>
+                    </h3>
+                    <%total+=(cartDetails.qty * cartDetails.details.price)%>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr />
+          <%}%>
+          <!-- second card -->
+        </div>
+        <!-- right side div -->
+        <div class="col-md-12 col-lg-4 col-11 mx-auto mt-lg-0 mt-md-5">
+          <div class="right_side p-3 shadow bg-white">
+            <h3 class="poduct_name mb-2 text-secondary">PRICE DETAILS</h3>
+            <hr />
+            <div class="price_indiv d-flex justify-content-between">
+              <p>Price(<%=cart.length%>)</p>
+              <p>$ <span><%=total%> </span></p>
+            </div>
+            <div class="price_indiv d-flex justify-content-between">
+              <p>Shipping Charge</p>
+              <p>$ 0</p>
+            </div>
+            <hr />
+            <div class="price_indiv d-flex justify-content-between">
+              <h5>Total Amount</h5>
+              <p>$ <%=total%></p>
+            </div>
+            <hr />
+            <button class="btn btn-primary">Place Order</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%-include("../partials/footer")%>
+
+<script>
+  let qty = document.getElementById("qty");
+  function decrease() {
+    var item = document.getElementById("textbox");
+    if (item.value <= 1) {
+      item.value = 1;
+    } else {
+      item.value = parseInt(item.value) - 1;
+      console.log(item.value);
+      qty.innerHTML = item.value * p;
+    }
+  }
+  function increase() {
+    var item = document.getElementById("textbox");
+    if (item.value >= 5) {
+      item.value = 5;
+    } else {
+      item.value = parseInt(item.value) + 1;
+      qty.innerHTML = item.value;
+      console.log(item.value);
+    }
+  }
+</script>

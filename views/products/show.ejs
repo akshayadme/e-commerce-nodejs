@@ -1,0 +1,122 @@
+<%- include("../partials/header") %> <%- include("../partials/navbar")%>
+<div class="container mt-5 show">
+  <%- include("../partials/flash")%>
+  <div class="row">
+    <div class="col-md-6">
+      <img src="<%=product.img%>" alt="" />
+    </div>
+    <div class="col-md-6">
+      <h1><%=product.name%></h1>
+      <p><%=product.subheading%></p>
+      <h3><strong>$ <%=product.price%> </strong></h3>
+      <p><%=product.desc%></p>
+      <form action="/products/<%=product._id%>?_method=DELETE" method="POST">
+        <!-- <a type="submit" class="btn btn-danger">Add to Cart</a> -->
+      </form>
+      <div class="d-flex">
+        <!-- <form action="/products/<%=product._id%>?_method=DELETE" method="POST">
+          <a type="submit" class="btn btn-danger m-1">Add to Cart</a>
+        </form> -->
+        <!-- <form action="/products/<%=product._id%>?_method=DELETE" method="POST">
+          <a href="/products/<%=product._id%>/edit" type="submit" class="btn btn-danger m-1">Add to Cart</a>
+        </form> -->
+        <form action="/user/cart/<%=product._id%>" method="POST">
+          <button type="submit" class="btn btn-danger m-1">
+            <i class="fas fa-shopping-cart"></i> Add to Cart
+          </button>
+        </form>
+
+        <a
+          href="/products/<%=product._id%>/edit"
+          class="btn btn-outline-warning m-1"
+          ><i class="far fa-heart"></i> Wish List</a
+        >
+      </div>
+    </div>
+    <div class="col md-6 my-5">
+      <h1>Leave a Review</h1>
+      <form
+        class="needs-validation"
+        action="/products/<%=product._id%>/review"
+        method="POST"
+        novalidate
+      >
+        <div class="">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Rating</label
+          >
+
+          <fieldset class="starability-basic">
+            <input
+              type="radio"
+              id="no-rate"
+              class="input-no-rate"
+              name="rating"
+              value="0"
+              checked
+              aria-label="No rating."
+            />
+            <input type="radio" id="first-rate1" name="rating" value="1" />
+            <label for="first-rate1" title="Terrible">1 star</label>
+            <input type="radio" id="first-rate2" name="rating" value="2" />
+            <label for="first-rate2" title="Not good">2 stars</label>
+            <input type="radio" id="first-rate3" name="rating" value="3" />
+            <label for="first-rate3" title="Average">3 stars</label>
+            <input type="radio" id="first-rate4" name="rating" value="4" />
+            <label for="first-rate4" title="Very good">4 stars</label>
+            <input type="radio" id="first-rate5" name="rating" value="5" />
+            <label for="first-rate5" title="Amazing">5 stars</label>
+          </fieldset>
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="Review title"
+            name="title"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label"
+            >Review this product</label
+          >
+          <textarea
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+            placeholder="Description..."
+            name="comment"
+            required
+          ></textarea>
+        </div>
+        <div class="d-grid gap-2 col-6">
+          <button class="btn btn-info btn-lg text-white" type="submit">
+            SUBMIT
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-6 my-5">
+      <h1>Ratings & Reviews</h1>
+      <% for(let review of product.reviews.reverse()){%>
+      <div class="border border-3 p-3 mb-3">
+        <p class="starability-result" data-rating="<%=review.rating %>">
+          Rated: 3 stars
+        </p>
+        <h5><%=review.title%></h5>
+
+        <p><%=review.comment %></p>
+        <small class="text-black-50">
+          <span><%=review.user %> <i class="fas fa-check-circle"></i> </span
+          ><%=review.dateCommented%>
+        </small>
+      </div>
+      <%}%>
+    </div>
+  </div>
+</div>
+
+<%-include("../partials/footer")%>

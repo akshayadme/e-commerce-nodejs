@@ -1,0 +1,36 @@
+<%- include("../partials/header") %> <%- include("../partials/navbar")%>
+
+<div class="container mt-5">
+  <h1 class="display-4 my-5">Login</h1>
+  <%- include("../partials/flash")%>
+  <form class="needs-validation" action="/login" method="POST" novalidate>
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        name="username"
+        required
+      />
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        name="password"
+        required
+      />
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary mb-3">Save Details</button>
+    </div>
+  </form>
+</div>
+
+<%-include("../partials/footer")%>
